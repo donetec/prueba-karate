@@ -22,7 +22,7 @@ Feature: Mascotas
     Then match response == read('../schemas/getUserResponse.json')
     Then status 200
 
-  @Mascotas
+  @Mascotas-find
   Scenario: Buscar mascotas
     Given path "/pet/findByStatus"
     And param status = 'sold'
@@ -31,19 +31,9 @@ Feature: Mascotas
     * def resp =
       """
         function resp(response){
-          let mapa = new Map();
-          let clave, valor;
-          response.forEach (function(value, key) {
-            clave = value.id;
-            valor = value.name;
-
-            //mapa.set(clave, valor);
-            console.log({clave: valor});
-            //console.log("NAME " + value.name);
+          response.forEach(function(value, key) {
+            console.log("ID " + value.id + " - NAME " + value.name);
           })
-          //return {clave, valor};
-          }
-
+        }
       """
-    And def x = resp(response)
-    * print x
+
